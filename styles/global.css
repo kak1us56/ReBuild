@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+.lh-n {
+    line-height: normal;
+}
+
+body {
+    overflow-y: hidden;
+}
+
+@keyframes head-bg-block-1 {
+    0%   {
+        top: 0;
+    }
+    50%  {
+        top: 160px;
+    }
+    100% {
+        top: 0;
+    }
+}
+
+@keyframes head-bg-block-2 {
+    0%   {
+        top: 160px;
+    }
+    50%  {
+        top: 0;
+    }
+    100% {
+        top: 160px;
+    }
+}
+
+.header-block-animation1 {
+    animation-name: head-bg-block-1;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+}
+
+.header-block-animation2 {
+    animation-name: head-bg-block-2;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+}

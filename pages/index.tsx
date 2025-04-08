@@ -1,7 +1,18 @@
+import Head from "next/head";
+import { Header } from "../components/header";
+import { Main } from "../components/main";
+
 export default function HomePage() {
     return (
-        <div>
-            
-        </div>
+        <>
+            <Head>
+                <title>ReBuildUa</title>
+                <link rel="shortcut icon" href="/logo-icon.png" type="image/x-icon" />
+            </Head>
+            <div>
+                <Header />
+                <Main />
+            </div>
+        </>
     )
 }
