@@ -4,10 +4,6 @@
     line-height: normal;
 }
 
-body {
-    overflow-y: hidden;
-}
-
 @keyframes head-bg-block-1 {
     0%   {
         top: 0;
@@ -42,4 +38,11 @@ body {
     animation-name: head-bg-block-2;
     animation-duration: 6s;
     animation-iteration-count: infinite;
+}
+
+.mapboxgl-ctrl-bottom-left {
+    display: none;
+}
+.mapboxgl-ctrl-bottom-right {
+    display: none;
 }

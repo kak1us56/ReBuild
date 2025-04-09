@@ -9,7 +9,7 @@ interface ItemProps {
 
 export const ButtonsItem: React.FC<ItemProps> = ({ img, header, text, width }) => {
     return (
-        <div className="w-[162px] h-[133.5px] rounded-[20px] bg-white border-2 border-[#989898]">
+        <div className="w-[162px] h-[133.5px] rounded-[20px] bg-white shadow-[2px_5px_8.3px_0px_rgba(0,_0,_0,_0.25)]">
             <div className="flex items-center gap-2 pt-3 pl-[6px]">
                 <div>
                     <Image src={img} alt="list" width={width} />

@@ -1,0 +1,1 @@
+export { MapBg } from './map-bg';
