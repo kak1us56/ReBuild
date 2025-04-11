@@ -1,6 +1,7 @@
 import { StaticImageData } from "next/image";
 
 export interface ListProps {
+    id?: string;
     name: string;
     address: string;
     img1?: StaticImageData;

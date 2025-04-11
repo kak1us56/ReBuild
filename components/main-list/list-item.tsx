@@ -6,7 +6,7 @@ import { ListProps } from "../constants/interfaces";
 // import image2 from './images/list-item-img2.png';
 // import image3 from './images/list-item-img3.png';
 
-export const ListItem: React.FC<ListProps> = ({ name, address, img1, img2, img3, img4, img5, aproximate, total, information }) => {
+export const ListItem: React.FC<ListProps> = ({ id, name, address, img1, img2, img3, img4, img5, aproximate, total, information }) => {
     return (
         <div>
             <h1 className="text-black font-bold lh-n text-[24px]">
