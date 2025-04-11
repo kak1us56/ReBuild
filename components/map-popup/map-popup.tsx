@@ -4,6 +4,7 @@ import { ListProps } from '../constants/interfaces';
 import { useEffect, useState } from 'react';
 
 export const MapPopup: React.FC<ListProps> = ({ name, address, aproximate, img, total, history }) => {
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const [sumPercents, setSumPercents] = useState<number>(0);
     const [sumWidth, setSumWidth] = useState<number>(0);
 
@@ -16,7 +17,8 @@ export const MapPopup: React.FC<ListProps> = ({ name, address, aproximate, img, 
     }, [])
 
     return (
-        <div className="w-full min-h-[250px] absolute bottom-0 bg-white rounded-t-[20px]">
+        <div className={`w-full min-h-[250px] absolute bg-white rounded-t-[20px] transition-popup
+            ${isOpen ? 'bottom-0' : 'bottom-[-100%]'}`}>
             <div className='max-w-[379px] mx-auto px-4'>
                 <div className="w-20 h-1 rounded-[2px] bg-[#404040] mx-auto mt-[18px]"></div>
                 <h1 className='text-black text-[24px] lh-n font-bold pt-[28px]'>
@@ -50,12 +52,11 @@ export const MapPopup: React.FC<ListProps> = ({ name, address, aproximate, img, 
                     </p>
                 </div>
                 <div className='bg-[#989898] w-[280px] h-5 rounded-[10px] mx-auto relative flex justify-center items-center
-                    text-white text-[12px] lh-n font-normal'>
+                    text-white text-[10px] lh-n font-normal'>
                     <div style={{width: `${sumWidth}px`}} className={`absolute top-0 left-0 h-5 bg-black rounded-[10px]`}></div>
                     <p className='z-[3] relative'>
                         {sumPercents}%  
                     </p>
-                   
                 </div>
                 <Link href='#'>
                     <div className='w-[180px] h-10 bg-[#424242] rounded-[10px] flex justify-center items-center mx-auto my-[18px]'>

@@ -4,6 +4,10 @@
     line-height: normal;
 }
 
+.transition-popup {
+    transition: all .3s ease;
+}
+
 @keyframes head-bg-block-1 {
     0%   {
         top: 0;
@@ -15,7 +19,6 @@
         top: 0;
     }
 }
-
 @keyframes head-bg-block-2 {
     0%   {
         top: 160px;
@@ -27,17 +30,74 @@
         top: 160px;
     }
 }
+@-moz-keyframes head-bg-block-1 {
+    0%   {
+        -moz-top: 0;
+    }
+    50%  {
+        -moz-top: 160px;
+    }
+    100% {
+        -moz-top: 0;
+    }
+}
+@-moz-keyframes head-bg-block-2 {
+    0%   {
+        -moz-top: 160px;
+    }
+    50%  {
+        -moz-top: 0;
+    }
+    100% {
+        -moz-top: 160px;
+    }
+}
+@-webkit-keyframes head-bg-block-1 {
+    0%   {
+        -webkit-top: 0;
+    }
+    50%  {
+        -webkit-top: 160px;
+    }
+    100% {
+        -webkit-top: 0;
+    }
+}
+
+@-webkit-keyframes head-bg-block-2 {
+    0%   {
+        -webkit-top: 160px;
+    }
+    50%  {
+        -webkit-top: 0;
+    }
+    100% {
+        -webkit-top: 160px;
+    }
+}
 
 .header-block-animation1 {
     animation-name: head-bg-block-1;
+    -moz-animation-name: head-bg-block-1;
+    -webkit-animation-name: head-bg-block-1;
     animation-duration: 6s;
+    -moz-animation-duration: 6s;
+    -webkit-animation-duration: 6s;
     animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
 }
 
 .header-block-animation2 {
     animation-name: head-bg-block-2;
+    -moz-animation-name: head-bg-block-2;
+    -webkit-animation-name: head-bg-block-2;
     animation-duration: 6s;
+    -moz-animation-duration: 6s;
+    -webkit-animation-duration: 6s;
     animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
 }
 
 .mapboxgl-ctrl-bottom-left {

@@ -14,7 +14,7 @@ export function Main() {
 
     return (
         <main>
-            <div className={`bg-[url(/bg-main.png)] bg-repeat bg-[length:80px] bg-[#D9D9D9]
+            <div className={`bg-[url(/bg-main.png)] bg-fixed bg-repeat bg-[length:80px] bg-[#D9D9D9]
                 ${isHeight ? 'min-h-[390px]' : 'min-h-[calc(100vh_-_223px_-_114px)]'}`}>
                 <div className="max-w-[410px] px-4 mx-auto">
                     <div className="pt-[23px]">
@@ -27,7 +27,9 @@ export function Main() {
                             <Link href={'/list'}>
                                 <ButtonsItem img={list} header="Всі об’єкти" text="Список всіх об’єктів, які потребують відновлення" />
                             </Link>
-                            <ButtonsItem img={account} header="Кабінет" text="Особистий кабінет (Волонтера, Інвестора, Забудовника)" />
+                            <Link href={'/cabinet'}>
+                                <ButtonsItem img={account} header="Кабінет" text="Особистий кабінет (Волонтера, Інвестора, Забудовника)" />
+                            </Link>
                         </div>
                         <div className="flex flex-col gap-[26px]">
                             <Link href={'/map'}>

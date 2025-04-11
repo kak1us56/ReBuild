@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "keen-slider": "^6.8.6",
     "mapbox-gl": "^3.11.0",
     "next": "^15.2.4",
     "react": "^19.1.0",

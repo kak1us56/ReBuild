@@ -1,4 +1,5 @@
 import { Roboto_Mono } from "next/font/google"
+import Link from "next/link";
 
 const robotoMono: any = Roboto_Mono({
     subsets: ["latin", "cyrillic"],
@@ -11,15 +12,15 @@ export function Footer() {
                 <div className="max-w-[338px] px-4 mx-auto">
                     <div className="text-white text-[12px]/[131.358%] tracking-[0.12px] font-semibold pt-[14px] flex justify-between">
                         <div className="flex flex-col gap-[5px]">
-                            <p>
+                            <Link href={'/list'}>
                                 Загальний список
-                            </p>
-                            <p>
+                            </Link>
+                            <Link href={'/map'}>
                                 Інтерактивна мапа
-                            </p>
-                            <p>
+                            </Link>
+                            <Link href={'/cabinet'}>
                                 Особистий кабінет
-                            </p>
+                            </Link>
                         </div>
                         <div className="flex flex-col gap-[5px] text-right">
                             <p>
