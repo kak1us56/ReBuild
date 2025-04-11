@@ -6,8 +6,26 @@ import listItemImg from './images/list-item-img.png';
 import listItemImg2 from './images/list-item-img2.png';
 import listItemImg3 from './images/list-item-img3.png';
 import sort from './images/sort.png'
+import { useEffect, useState } from 'react';
+import { ListProps } from '../constants/interfaces';
 
 export function MainList() {
+    const [items, setItems] = useState<ListProps[]>([]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const res = await fetch("https://rebuildua.site/api/get_objects.php");
+          const data = await res.json();
+          setItems(data);
+        } catch (error) {
+          console.error("Ошибка при загрузке данных:", error);
+        }
+      };
+  
+      fetchData();
+    }, []);
+
     return (
         <main>
             <div className="min-h-[calc(100vh-115px_-_114px)] bg-fixed bg-[url('/bg-main.png')] bg-repeat bg-[length:80px] bg-[#D9D9D9]">
@@ -35,7 +53,7 @@ export function MainList() {
                         </div>
                     </div>
                     <div className='flex flex-col gap-[39px] pt-[23px] pb-[39px]'>
-                        <ListItem
+                        {/* <ListItem
                             name='ТРЦ “Шевченківський”'
                             address='м. Одеса, просп. Шевченка, 4-Д' 
                             img={listItemImg}
@@ -55,7 +73,20 @@ export function MainList() {
                             img={listItemImg3}
                             aproximate={320000}
                             total={45724}
-                            information='#' />
+                            information='#' /> */}
+                        {items.map((item) => (
+                            <ListItem
+                                key={item.id}
+                                name={item.obj_name}
+                                address={item.address_1}
+                                aproximate={item.approximate}
+                                total={item.total}
+                                information={item.information}
+                                img1={item.photo_1}
+                                img2={item.photo_2}
+                                img3={item.photo_3}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>

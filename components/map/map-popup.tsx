@@ -10,7 +10,7 @@ interface MapPopupProps extends ListProps {
     setIsOpen: (active: boolean) => void;
 }
 
-export const MapPopup: React.FC<MapPopupProps> = ({ name, address, aproximate, img, total, history, isOpen, onClose, setIsOpen }) => {
+export const MapPopup: React.FC<MapPopupProps> = ({ name, address, aproximate, img1, img2, img3, img4, img5, total, history, isOpen, onClose, setIsOpen }) => {
     const [sumPercents, setSumPercents] = useState<number>(0);
     const [sumWidth, setSumWidth] = useState<number>(0);
 
@@ -20,7 +20,7 @@ export const MapPopup: React.FC<MapPopupProps> = ({ name, address, aproximate, i
 
         setSumPercents(amountPercent);
         setSumWidth(width);
-    }, [])
+    }, [total, aproximate])
 
     return (
         <div className={`w-full min-h-[250px] fixed bottom-0 left-0 bg-white rounded-t-[20px] transition-popup
@@ -36,7 +36,7 @@ export const MapPopup: React.FC<MapPopupProps> = ({ name, address, aproximate, i
                 <p className='text-[12px] lh-n font-semibold text-[#464646] pb-4'>
                     {address}
                 </p>
-                <PopupSwiper />
+                <PopupSwiper img1={img1} img2={img2} img3={img3} img4={img4} img5={img5}/>
                 <div className='pt-5'>
                     <p className='text-[#464646] text-[15px] lh-n font-normal'>
                         Історія: <br />{history}  

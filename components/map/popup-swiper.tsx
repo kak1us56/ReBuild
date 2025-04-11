@@ -1,44 +1,65 @@
-import 'keen-slider/keen-slider.min.css';
-import { useKeenSlider } from 'keen-slider/react';
-import Image from 'next/image';
-import { useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react'
+import useEmblaCarousel from 'embla-carousel-react'
+import Image, { StaticImageData } from 'next/image'
 
-const images = [
-    '/images/image1.png',
-    '/images/image2.png',
-    '/images/image3.png',
-];
+// const images = [
+//     '/images/image1.png',
+//     '/images/image2.png',
+//     '/images/image3.png',
+// ];
 
-export const PopupSwiper = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [sliderRef] = useKeenSlider<HTMLDivElement>({
-      loop: true,
-      slides: {
-        perView: 1.2,
-        spacing: 16,
-        origin: 'center',
-      },
-      slideChanged(s) {
-        setCurrentSlide(s.track.details.rel);
-      },
-      renderMode: 'performance',
-    });
-  
-    return (
-        <div className='overflow-hidden'>
-            <div ref={sliderRef} className="keen-slider px-4 pt-4">
-                {images.map((img, i) => (
-                    <div
-                        className={`keen-slider__slide flex justify-center transition-all duration-300 ${
-                            i === currentSlide ? 'scale-100 blur-0' : 'scale-80 blur-sm opacity-60'
-                        }`}
-                        >
-                        <div className="w-[260px] h-[170px] overflow-hidden shadow-xl bg-white relative">
-                            <Image src={img} alt={`slide-${i}`} fill className="object-cover" />
-                        </div>
-                    </div>
-                ))}
-            </div>            
+interface FotosProps {
+  img1?: StaticImageData;
+  img2?: StaticImageData;
+  img3?: StaticImageData;
+  img4?: StaticImageData;
+  img5?: StaticImageData;
+}
+
+export const PopupSwiper: React.FC<FotosProps> = ({ img1, img2, img3, img4, img5 }) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'center' })
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  const images = [img1, img2, img3, img4, img5].filter(Boolean);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+  }, [emblaApi])
+
+  useEffect(() => {
+    if (!emblaApi) return
+    onSelect()
+    emblaApi.on('select', onSelect)
+  }, [emblaApi, onSelect])
+
+  return (
+    <div className="overflow-hidden px-4">
+      <div className="embla" ref={emblaRef}>
+        <div className="flex">
+          {images.map((src, index) => (
+            <div
+              className="flex-[0_0_70%] mx-0 transition-transform"
+              key={index}
+            >
+                <div
+                className={`relative w-full h-48 overflow-hidden shadow-xl transition-all duration-500 ${
+                    selectedIndex === index
+                    ? 'scale-100 blur-0 z-10'
+                    : 'scale-80 blur-[3px] opacity-70 z-0'
+                }`}
+                >
+                <Image
+                  src={src}
+                  alt={`Image ${index}`}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          ))}
         </div>
-    );
+      </div>
+    </div>
+  )
 }

@@ -6,130 +6,39 @@ import Link from 'next/link';
 import Image from 'next/image';
 import arrow from './images/arrow.png'
 import image1 from './images/image1.png';
+import { ListProps } from '../constants/interfaces';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2dzZGdmIiwiYSI6ImNtOTh4OXdrdDA3MTcyaXM1MnpoaXcyb3AifQ.xdey_SzV46CErKH7frpRIg';
 
-// const geojson = {
-//   type: "FeatureCollection",
-//   features: [
-//     {
-//       type: "Feature",
-//       geometry: {
-//         type: "Point",
-//         coordinates: [30.749293, 46.459499],
-//       },
-//       properties: {
-//         title: "Метка 1",
-//         description: "Описание 1",
-//       },
-//     },
-//     {
-//       type: "Feature",
-//       geometry: {
-//         type: "Point",
-//         coordinates: [30.712128, 46.398595],
-//       },  
-//       properties: {
-//         title: "Метка 2",
-//         description: "Описание 2",
-//       },
-//     },
-//     {
-//       type: "Feature",
-//       geometry: {
-//         type: "Point",
-//         coordinates: [30.747015, 46.49154],
-//       },
-//       properties: {
-//         title: "Метка 3",
-//         description: "Описание 3",
-//       },
-//     },
-//     {
-//       type: "Feature",
-//       geometry: {
-//         type: "Point",
-//         coordinates: [30.751372, 46.453121],
-//       },
-//       properties: {
-//         title: "Метка 3",
-//         description: "Описание 3",
-//       },
-//     },
-//   ],
-// };
-
-const geojson = {
-  type: "FeatureCollection",
-  features: [
-    {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [30.749293, 46.459499],
-      },
-      properties: {
-        title: 'ТРЦ “Шевченківський”',
-        address: 'м. Одеса, просп. Шевченка, 4-Д',
-        aproximate: 140000,
-        total: 56724,
-        history: '14.06.2023 російська ракета влучила у торговий центр “Шевченківський” у м. Одеса, внаслідок чого ТРЦ було зруйновано. Через брак коштів для відновлення, об’єкт досі знаходиться у стані, незадовільному для експлуатації.'
-      },
-    },
-    {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [30.712128, 46.398595],
-      },  
-      properties: {
-        title: 'ТРЦ “Шевченківський”',
-        address: 'м. Одеса, просп. Шевченка, 4-Д',
-        aproximate: 140000,
-        total: 56724,
-        history: '14.06.2023 російська ракета влучила у торговий центр “Шевченківський” у м. Одеса, внаслідок чого ТРЦ було зруйновано. Через брак коштів для відновлення, об’єкт досі знаходиться у стані, незадовільному для експлуатації.'
-      },
-    },
-    {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [30.747015, 46.49154],
-      },
-      properties: {
-        title: 'ТРЦ “Шевченківський”',
-        address: 'м. Одеса, просп. Шевченка, 4-Д',
-        aproximate: 140000,
-        total: 56724,
-        history: '14.06.2023 російська ракета влучила у торговий центр “Шевченківський” у м. Одеса, внаслідок чого ТРЦ було зруйновано. Через брак коштів для відновлення, об’єкт досі знаходиться у стані, незадовільному для експлуатації.'
-      },
-    },
-    {
-      type: "Feature",
-      geometry: {
-        type: "Point",
-        coordinates: [30.751372, 46.453121],
-      },
-      properties: {
-        title: 'ТРЦ “Шевченківський”',
-        address: 'м. Одеса, просп. Шевченка, 4-Д',
-        aproximate: 140000,
-        total: 56724,
-        history: '14.06.2023 російська ракета влучила у торговий центр “Шевченківський” у м. Одеса, внаслідок чого ТРЦ було зруйновано. Через брак коштів для відновлення, об’єкт досі знаходиться у стані, незадовільному для експлуатації.'
-      },
-    },
-  ],
-};
+interface FeatureFromAPI extends ListProps {
+  coordinate_heights: number;
+  coordinate_width: number;
+}
 
 export function MapBg() {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
 
-  const [popupData, setPopupData] = useState<any | null>(null); // данные для MapPopup
+  const [features, setFeatures] = useState<FeatureFromAPI[]>([]);
+  const [popupData, setPopupData] = useState<FeatureFromAPI | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
-    if (mapRef.current || !mapContainer.current) return;
+    const fetchData = async () => {
+      try {
+        const res = await fetch('https://rebuildua.site/api/get_objects.php');
+        const data = await res.json();
+        setFeatures(data);
+      } catch (error) {
+        console.error('Помилка при завантаженні даних:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (mapRef.current || !mapContainer.current || features.length === 0) return;
 
     const map = new mapboxgl.Map({
       container: mapContainer.current,
@@ -138,7 +47,7 @@ export function MapBg() {
       zoom: 11,
     });
 
-    geojson.features.forEach((feature) => {
+    features.forEach((feature) => {
       const el = document.createElement('div');
       el.className = 'marker';
       Object.assign(el.style, {
@@ -151,13 +60,26 @@ export function MapBg() {
       });
 
       el.addEventListener('click', () => {
+        map.flyTo({
+          center: [feature.coordinate_width, feature.coordinate_heights],
+          zoom: 13,
+          offset: [0, -320],
+          speed: 1.2,
+          curve: 1.5,
+          essential: true,
+        });
+      
         setPopupData({
-          name: feature.properties.title,
-          address: feature.properties.address,
-          aproximate: feature.properties.aproximate,
-          total: feature.properties.total,
-          history: feature.properties.history,
-          img: image1
+          name: feature.obj_name,
+          address: feature.address_1,
+          aproximate: feature.approximate,
+          total: feature.total,
+          history: feature.history,
+          img1: feature.photo_1 ?? '',
+          img2: feature.photo_2 ?? '',
+          img3: feature.photo_3 ?? '',
+          img4: feature.photo_4 ?? '',
+          img5: feature.photo_5 ?? '',
         });
         setIsPopupOpen(true);
       });
@@ -169,11 +91,16 @@ export function MapBg() {
         e.stopPropagation();
       });
 
-      new mapboxgl.Marker(el).setLngLat(feature.geometry.coordinates as [number, number]).addTo(map);
+      new mapboxgl.Marker(el).setLngLat([feature.coordinate_width, feature.coordinate_heights]).addTo(map);
     });
 
     mapRef.current = map;
-  }, []);
+
+    return () => {
+      map.remove();
+      mapRef.current = null;
+    };
+  }, [features]);
 
   return (
     <>
@@ -187,7 +114,11 @@ export function MapBg() {
           address={popupData.address}
           aproximate={popupData.aproximate}
           total={popupData.total}
-          img={popupData.img}
+          img1={popupData.img1}
+          img2={popupData.img2}
+          img3={popupData.img3}
+          img4={popupData.img4}
+          img5={popupData.img5}
           history={popupData.history}
           isOpen={isPopupOpen}
           onClose={() => setIsPopupOpen(false)}
