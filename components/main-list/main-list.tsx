@@ -3,6 +3,8 @@ import Link from 'next/link';
 import arrow from './images/arrow.png'
 import { ListItem } from './list-item';
 import listItemImg from './images/list-item-img.png';
+import listItemImg2 from './images/list-item-img2.png';
+import listItemImg3 from './images/list-item-img3.png';
 import sort from './images/sort.png'
 
 export function MainList() {
@@ -41,18 +43,18 @@ export function MainList() {
                             total={56724}
                             information='#' />
                         <ListItem
-                            name='ТРЦ “Шевченківський”'
-                            address='м. Одеса, просп. Шевченка, 4-Д' 
-                            img={listItemImg}
-                            aproximate={140000}
-                            total={56724}
+                            name='Лікарня “Compass”'
+                            address='м. Одеса, просп. Князя Ярослава Мудрого, 32а' 
+                            img={listItemImg2}
+                            aproximate={540000}
+                            total={128724}
                             information='#' />
                         <ListItem
-                            name='ТРЦ “Шевченківський”'
-                            address='м. Одеса, просп. Шевченка, 4-Д' 
-                            img={listItemImg}
-                            aproximate={140000}
-                            total={56724}
+                            name='Готель “Одеса”'
+                            address='м. Одеса, вул. Приморська, 6' 
+                            img={listItemImg3}
+                            aproximate={320000}
+                            total={45724}
                             information='#' />
                     </div>
                 </div>
