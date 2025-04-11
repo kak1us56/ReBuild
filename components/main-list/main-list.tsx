@@ -77,14 +77,14 @@ export function MainList() {
                         {items.map((item) => (
                             <ListItem
                                 key={item.id}
-                                name={item.obj_name}
-                                address={item.address_1}
-                                aproximate={item.approximate}
+                                name={item.name}
+                                address={item.address}
+                                aproximate={item.aproximate}
                                 total={item.total}
                                 information={item.information}
-                                img1={item.photo_1}
-                                img2={item.photo_2}
-                                img3={item.photo_3}
+                                img1={item.img1}
+                                img2={item.img2}
+                                img3={item.img3}
                             />
                         ))}
                     </div>

@@ -69,17 +69,21 @@ export function MapBg() {
           essential: true,
         });
       
+        const getValidImage = (img?: string) => {
+          return img && img !== '' ? img : undefined;
+        };
+
         setPopupData({
-          name: feature.obj_name,
-          address: feature.address_1,
-          aproximate: feature.approximate,
+          name: feature.name,
+          address: feature.address,
+          aproximate: feature.aproximate,
           total: feature.total,
           history: feature.history,
-          img1: feature.photo_1 ?? '',
-          img2: feature.photo_2 ?? '',
-          img3: feature.photo_3 ?? '',
-          img4: feature.photo_4 ?? '',
-          img5: feature.photo_5 ?? '',
+          img1: feature.img1 ?? '',
+          img2: feature.img2 ?? '',
+          img3: feature.img3 ?? '',
+          img4: feature.img4 ?? '',
+          img5: feature.img5 ?? '',
         });
         setIsPopupOpen(true);
       });
