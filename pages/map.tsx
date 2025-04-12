@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { MapBg } from "../components/map";
-import { MapPopups } from "../components/map-popup";
 import { useEffect } from "react";
 
 export default function Map() {
