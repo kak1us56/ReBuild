@@ -68,10 +68,6 @@ export function MapBg() {
           curve: 1.5,
           essential: true,
         });
-      
-        const getValidImage = (img?: string) => {
-          return img && img !== '' ? img : undefined;
-        };
 
         setPopupData({
           name: feature.name,

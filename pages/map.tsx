@@ -21,7 +21,7 @@ export default function Map() {
       </Head>
       <div>
         <MapBg />
-        <MapPopups />
+        {/* <MapPopups /> */}
       </div>            
     </>
   )
