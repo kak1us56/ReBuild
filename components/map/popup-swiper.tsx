@@ -54,6 +54,7 @@ export const PopupSwiper: React.FC<FotosProps> = ({ img1, img2, img3, img4, img5
                   alt={`Image ${index}`}
                   fill
                   className="object-cover"
+                  unoptimized
                 />
               </div>
             </div>

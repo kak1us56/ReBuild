@@ -20,7 +20,7 @@ export function MapBg() {
   const mapRef = useRef<mapboxgl.Map | null>(null);
 
   const [features, setFeatures] = useState<FeatureFromAPI[]>([]);
-  const [popupData, setPopupData] = useState<FeatureFromAPI | null>(null);
+  const [popupData, setPopupData] = useState<any | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
@@ -79,11 +79,11 @@ export function MapBg() {
           aproximate: feature.aproximate,
           total: feature.total,
           history: feature.history,
-          img1: feature.img1 ?? '',
-          img2: feature.img2 ?? '',
-          img3: feature.img3 ?? '',
-          img4: feature.img4 ?? '',
-          img5: feature.img5 ?? '',
+          img1: feature.img1,
+          img2: feature.img2,
+          img3: feature.img3,
+          img4: feature.img4,
+          img5: feature.img5,
         });
         setIsPopupOpen(true);
       });
