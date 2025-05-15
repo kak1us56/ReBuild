@@ -35,7 +35,7 @@ export const ListItem: React.FC<ListProps> = ({ id, name, address, img1, img2, i
                     {total} грн.
                 </p>
             </div>
-            <Link href={information}>
+            <Link href={information || '#'}>
                 <div className="w-[120px] h-[30px] flex justify-center items-center rounded-[10px] bg-[#424242]">
                     <p className="text-white text-[12px] font-semibold lh-n">
                         Детальніше
